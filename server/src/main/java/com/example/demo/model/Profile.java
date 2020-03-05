@@ -24,6 +24,9 @@ public class Profile {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "state")
+    private String state;
+
 
     public int getId() {
         return id;
@@ -67,5 +70,26 @@ public class Profile {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", age='" + age + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", state='" + state + '\'' +
+                '}';
     }
 }

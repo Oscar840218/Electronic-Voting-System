@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 
@@ -8,10 +10,14 @@ import javax.persistence.*;
 @Table(name = "user")
 public class User {
     @Id
-    @Column(name = "resident_id", updatable = false, nullable = false)
-    private String resident_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @Column(name = "resident_id")
+    @JsonProperty("resident_id")
+    private String residentId;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
     @JoinColumn(name = "profile_id")
@@ -29,27 +35,11 @@ public class User {
     private boolean voted;
 
     public String getResidentId() {
-        return resident_id;
+        return residentId;
     }
 
-    public void setResidentId(String resident_id) {
-        this.resident_id = resident_id;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public boolean isVoted() {
-        return voted;
-    }
-
-    public void setVoted(boolean voted) {
-        this.voted = voted;
+    public void setResidentId(String residentId) {
+        this.residentId = residentId;
     }
 
     public Profile getProfile() {
@@ -68,7 +58,35 @@ public class User {
         this.candidate = candidate;
     }
 
+    public String getRole() {
+        return role;
+    }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
 
+    public boolean isVoted() {
+        return voted;
+    }
 
+    public void setVoted(boolean voted) {
+        this.voted = voted;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", residentId='" + residentId + '\'' +
+                ", profile=" + profile +
+                ", candidate=" + candidate +
+                ", role='" + role + '\'' +
+                ", voted=" + voted +
+                '}';
+    }
 }

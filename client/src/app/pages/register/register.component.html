@@ -1,0 +1,156 @@
+<div *ngIf="showMessage" [ngClass]="messageClass" role="alert">
+  {{ message }}
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card card-nav-tabs">
+      <div class="card-body">
+        <form [formGroup]="form" (submit)="onRegisterSubmit()">
+          <div class="row">
+            <div class="col-md-6 pr-1">
+              <div class="form-group">
+                <label>Resident ID</label>
+                <input type="text" formControlName="resident_id" class="form-control" placeholder="Resident ID">
+                <!-- Validation -->
+                <ul>
+                  <li *ngIf="form.controls.resident_id.errors?.required && form.controls.resident_id.dirty">This field is required</li>
+                  <li *ngIf="(form.controls.resident_id.errors?.minlength && form.controls.resident_id.dirty || form.controls.resident_id.errors?.maxlength && form.controls.resident_id.dirty ) && form.controls.resident_id.dirty">Minimum characters: 5, Maximum characters: 30</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-6 pl-1">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+
+                <input type="email" formControlName="email" class="form-control" placeholder="Email">
+                <!-- Validation -->
+                <ul>
+                  <li *ngIf="form.controls.email.errors?.required && form.controls.email.dirty">This field is required</li>
+                  <li *ngIf="(form.controls.email.errors?.minlength && form.controls.email.dirty || form.controls.email.errors?.maxlength && form.controls.email.dirty ) && form.controls.email.dirty">Minimum characters: 5, Maximum characters: 30</li>
+                  <li *ngIf="form.controls.email.errors?.email && form.controls.email.dirty">This must be a valid e-mail</li>
+                </ul>
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 pr-1">
+              <div class="form-group">
+                <label>First Name</label>
+                <input type="text" formControlName="first_name" class="form-control" placeholder="First Name">
+                <!-- Validation -->
+                <ul>
+                  <li *ngIf="form.controls.first_name.errors?.required && form.controls.first_name.dirty">This field is required</li>
+                  <li *ngIf="(form.controls.first_name.errors?.maxlength && form.controls.first_name.dirty ) && form.controls.first_name.dirty">Maximum characters: 20</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-6 pl-1">
+              <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" formControlName="last_name" class="form-control" placeholder="Last Name">
+                <!-- Validation -->
+                <ul>
+                  <li *ngIf="form.controls.last_name.errors?.required && form.controls.last_name.dirty">This field is required</li>
+                  <li *ngIf="(form.controls.last_name.errors?.maxlength && form.controls.last_name.dirty ) && form.controls.last_name.dirty">Maximum characters: 20</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Address</label>
+                <input type="text" formControlName="address" class="form-control" placeholder="Home Address">
+                 <!-- Validation -->
+                 <ul>
+                  <li *ngIf="form.controls.address.errors?.required && form.controls.address.dirty">This field is required</li>
+                  <li *ngIf="(form.controls.address.errors?.minlength && form.controls.address.dirty || form.controls.address.errors?.maxlength && form.controls.address.dirty ) && form.controls.address.dirty">Minimum characters: 6, Maximum characters: 35</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 pr-1">
+              <div class="form-group">
+                <label for="sel1">State</label>
+                <select class="form-control" formControlName="state" id="sel1">
+                  <option value="WA" selected>WA</option>
+                  <option value="NJ">NJ</option>
+                  <option value="CA">CA</option>
+                  <option value="AK">AK</option>
+                  <option value="KY">KY</option>
+                  <option value="MA">MA</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4 px-1">
+              <div class="form-group">
+                <label for="sel1">Gender</label>
+                <select class="form-control" formControlName="gender" id="sel1">
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4 pl-1">
+              <div class="form-group">
+                <label for="sel1">Age</label>
+                <select class="form-control" formControlName="age" id="sel1">
+                  <option value="20~30">20~30</option>
+                  <option value="30~40">30~40</option>
+                  <option value="40~50">40~50</option>
+                  <option value="50~60">50~60</option>
+                  <option value="60~70">60~70</option>
+                  <option value="70up">70 up</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="sel1">Election State</label>
+                <select class="form-control" formControlName="election_state" id="sel1">
+                  <option>WA</option>
+                  <option>NJ</option>
+                  <option>CA</option>
+                  <option>AK</option>
+                  <option>KY</option>
+                  <option>MA</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Introduction</label>
+                <textarea class="form-control textarea" formControlName="introduction"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="radio-inline">
+                  <input type="radio" value="CITIZEN" name="role" formControlName="role" checked (change)="onRoleChange('CITIZEN')" > Citizen
+                </label>
+                &nbsp;&nbsp;
+                <label class="radio-inline">
+                  <input type="radio" value="CANDIDATE" name="role" formControlName="role" (change)="onRoleChange('CANDIDATE')">Candidate
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="update ml-auto mr-auto">
+              <button type="submit" class="btn btn-primary btn-round" [disabled]="!form.valid || processing">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

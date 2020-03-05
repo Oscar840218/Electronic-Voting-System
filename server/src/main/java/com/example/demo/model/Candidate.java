@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "candidate")
 public class Candidate {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "area")
@@ -44,5 +44,15 @@ public class Candidate {
 
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
+    }
+
+    @Override
+    public String toString() {
+        return "Candidate{" +
+                "id=" + id +
+                ", area='" + area + '\'' +
+                ", name='" + name + '\'' +
+                ", introduction='" + introduction + '\'' +
+                '}';
     }
 }
