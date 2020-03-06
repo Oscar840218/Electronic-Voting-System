@@ -1,13 +1,15 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.User;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -16,30 +18,41 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
-    @GetMapping("/all")
-    public Optional<User> getAll() {
-        return userRepository.findByResidentId("12345");
+    @PostMapping(path = "/login")
+    public Object login(@RequestBody String residentId) {
+
+        if (residentId != null) {
+            Optional<User> user = userService.login(residentId);
+            if (user.isPresent()) {
+                String token = userService.createToken(user.get().getId());
+                if (token != null) {
+                    Map<String, String> json = new LinkedHashMap<>();
+                    json.put("success", "true");
+                    json.put("message", "Login Success!");
+                    json.put("role", user.get().getRole());
+                    json.put("token", token);
+                    return json;
+                } else {
+                    return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("Token error");
+                }
+            } else {
+                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("Can not find User account");
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("Server error");
+        }
     }
-
 
 
     @PostMapping(path = "/register")
     public ResponseEntity<String> createUser(@RequestBody User user) {
 
-        try {
-            if (userRepository.findByResidentId(user.getResidentId()).isPresent()) {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("The account has been enrolled");
-            } else {
-                userRepository.save(user);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("Server Error");
+        if(userService.createNewUser(user)) {
+            return ResponseEntity.status(HttpStatus.CREATED).body("Register user success");
         }
-  
-        return ResponseEntity.status(HttpStatus.CREATED).body("Register user success");
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Account existed");
     }
 }

@@ -5,7 +5,6 @@ import { User } from '../../models/user';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-register',
@@ -151,7 +150,7 @@ export class RegisterComponent implements OnInit {
         }, 1000)
       },
       (err) => {
-        this.messageClass = 'alert alert-dagner';
+        this.messageClass = 'alert alert-danger';
         this.message = 'Register Failed!'
         this.showMessage = true;
         console.log(err);

@@ -1,21 +1,24 @@
+<div *ngIf="showMessage" [ngClass]="messageClass" role="alert">
+  {{ message }}
+</div>
 <div class="row justify-content-center">
   <div class="col-md-6">
       <div class="card card-nav-tabs">
       <h4 class="card-header card-header-info">Welcome to electronic voting system!</h4>
       <div class="card-body">
 
-        <form>
+        <form [formGroup]="form" (submit)="onLoginSubmit()">
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
                 <label>Resident ID</label>
-                <input type="text" class="form-control" placeholder="Resident ID">
+                <input type="text" class="form-control" formControlName="resident_id" placeholder="Resident ID">
               </div>
             </div>
           </div>
           <div class="row">
             <div class="update ml-auto mr-auto">
-              <button class="btn btn-primary btn-round" (click)="onLoginSubmit()">Submit</button>
+              <button type="submit" class="btn btn-primary btn-round" [disabled]="!form.valid || processing">Submit</button>
             </div>
           </div>
         </form>

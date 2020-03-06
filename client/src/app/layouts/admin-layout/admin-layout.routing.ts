@@ -1,3 +1,5 @@
+import { NotAuthGuard } from '../../guards/notauth.guard';
+import { AuthGuard } from '../../guards/auth.guard';
 
 import { Routes } from '@angular/router';
 
@@ -11,12 +13,12 @@ import { LoginComponent } from './../../pages/login/login.component';
 import { RegisterComponent } from './../../pages/register/register.component';
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'dashboard',      component: DashboardComponent },
-    { path: 'user',           component: UserComponent },
-    { path: 'table',          component: TableComponent },
-    { path: 'typography',     component: TypographyComponent },
-    { path: 'icons',          component: IconsComponent },
-    { path: 'notifications',  component: NotificationsComponent },
-    { path: 'login',          component: LoginComponent },
-    { path: 'register',       component: RegisterComponent }
+    { path: 'dashboard',      component: DashboardComponent ,     canActivate: [AuthGuard]},
+    { path: 'user',           component: UserComponent ,          canActivate: [AuthGuard]},
+    { path: 'table',          component: TableComponent ,         canActivate: [AuthGuard]},
+    { path: 'typography',     component: TypographyComponent ,    canActivate: [AuthGuard]},
+    { path: 'icons',          component: IconsComponent ,         canActivate: [AuthGuard]},
+    { path: 'notifications',  component: NotificationsComponent , canActivate: [AuthGuard]},
+    { path: 'login',          component: LoginComponent ,         canActivate: [NotAuthGuard]},
+    { path: 'register',       component: RegisterComponent ,      canActivate: [NotAuthGuard]}
 ];

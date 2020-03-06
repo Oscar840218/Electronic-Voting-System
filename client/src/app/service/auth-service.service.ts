@@ -10,7 +10,7 @@ export class AuthServiceService {
 
   readonly domain = 'http://localhost:8080/user'
   authToken;
-  user;
+  role;
   options;
 
   constructor(private http: Http) { }
@@ -32,4 +32,27 @@ export class AuthServiceService {
   registerUser(user) {
     return this.http.post(this.domain + '/register', user);
   }
+
+  login(resident_id) {
+    return this.http.post(this.domain + '/login', resident_id).map(res => res.json());
+  }
+
+  storeUserData(token, role) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('role', role);
+    this.authToken = token;
+  }
+
+  loggedIn() {
+    return tokenNotExpired();
+  }
+
+
+  logout() {
+    this.authToken = null;
+    this.role = null;
+    localStorage.clear();
+  }
+
+
 }

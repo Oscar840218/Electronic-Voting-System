@@ -1,3 +1,5 @@
+import { NotAuthGuard } from './guards/notauth.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { AuthServiceService } from './service/auth-service.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -32,7 +34,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     FooterModule,
     HttpModule
   ],
-  providers: [AuthServiceService],
+  providers: [AuthServiceService, AuthGuard, NotAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

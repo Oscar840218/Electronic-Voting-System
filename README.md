@@ -11,6 +11,10 @@
   * Deploy Hadoop Storm to deal with massvie streaming voting data
   * User authentication system
 
+## How to use
+###### Follow the README in the client directory
+###### Follow the README in the server directory
+
 ## Team information
 ###### 011621735 Lieh-Hsuan Chen oscar840218@gmail.com
 ###### 011632825 Hung-Wei Lee s1023746@gmail.com
