@@ -15,6 +15,9 @@
 ###### Follow the README in the client directory
 ###### Follow the README in the server directory
 
+## How to test
+###### Follow the README in the server directory
+
 ## Team information
 ###### 011621735 Lieh-Hsuan Chen oscar840218@gmail.com
 ###### 011632825 Hung-Wei Lee s1023746@gmail.com
