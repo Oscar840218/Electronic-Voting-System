@@ -55,4 +55,5 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Account existed");
     }
+
 }

@@ -57,4 +57,8 @@ public class UserService {
         }
         return null;
     }
+
+    public String testConnection() {
+        return "Server connection success";
+    }
 }
